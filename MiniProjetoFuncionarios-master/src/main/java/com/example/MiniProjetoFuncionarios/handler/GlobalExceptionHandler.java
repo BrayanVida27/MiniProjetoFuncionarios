@@ -32,4 +32,12 @@ public class GlobalExceptionHandler {
         erro.put("erro", ex.getMessage());
         return erro;
     }
+
+     //tratamento de erro para email duplicado
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    public ResponseEntity<?> handleErro() {
+        return ResponseEntity
+                .badRequest()
+                .body(Map.of("erro", "E-mail já cadastrado."));
+    }
 }
